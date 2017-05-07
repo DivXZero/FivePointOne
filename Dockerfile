@@ -31,10 +31,13 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh
     nvm alias default $NODE_VERSION && \
     nvm use default
 
+#RUN curl -o- -L https://yarnpkg.com/install.sh | bash && \
+#    source /root/.bashrc
+
 RUN npm install -g yarn
 
 # Symlink fix for yarn (Required when running with a docker volume backed by NTFS)
-RUN sed -i -e 's/})(), 4);/})(), 1);/g' $NODE_PATH/yarn/lib/package-linker.js
+#RUN sed -i -e 's/})(), 4);/})(), 1);/g' $NODE_PATH/yarn/lib/package-linker.js
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
